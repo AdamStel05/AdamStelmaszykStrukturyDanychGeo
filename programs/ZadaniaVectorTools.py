@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import Image, ImageTk
 
 def close_program():
     window.destroy()
@@ -9,14 +10,15 @@ window.resizable(False, False)
 
 canvas = tk.Canvas(
     window,
-    width=700,
-    height=700,
+    width=1920,
+    height=1280,
     highlightthickness=0
 )
 
 canvas.pack()
 
-background_screen = tk.PhotoImage(file="C:/Users/stelm/Downloads/Piąty semestr/lew.png")
+pil_image = Image.open("lew.png")
+background_screen = ImageTk.PhotoImage(pil_image)
 
 canvas.create_image(
     0,
@@ -26,26 +28,26 @@ canvas.create_image(
 )
 
 canvas.create_text(
-    300,
+    350,
     100,
-    text="Wielka strona",
+    text="Wielka strona z lwem",
+    font=("Times New Roman", 60, "italic"),
+    fill="black"
+)
+
+canvas.create_text(
+    150,
+    400,
+    text="Opcje",
     font=("Times New Roman", 30, "italic"),
     fill="black"
 )
 
 canvas.create_text(
     150,
-    400,
-    text="Opcje:",
-    font=("Times New Roman", 15, "italic"),
-    fill="black"
-)
-
-canvas.create_text(
-    150,
-    400,
+    500,
     text="Wyjdź",
-    font=("Times New Roman", 10, "italic"),
+    font=("Times New Roman", 20, "italic"),
     fill="black",
     tags="zamknij"
 )
