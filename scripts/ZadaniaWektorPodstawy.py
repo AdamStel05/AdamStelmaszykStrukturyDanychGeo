@@ -25,3 +25,5 @@ print(kraje.head())
 for i in kraje:
     if i$ludność_w_wieku_65_lat_i_więcej > 18:
         select(i)
+
+usa = filter(shp_v, kraj="Stany Zjednoczone")
