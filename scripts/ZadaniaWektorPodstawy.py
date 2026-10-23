@@ -1,6 +1,6 @@
 import geopandas as gpd
 
-path_to_files = "C:/Users/stelm/Downloads/Piąty semestr/"
+path_to_files = "../dane/"
 
 shp_v = gpd.read_file(path_to_files+"wulkany/lw1/lw1.shp")
 print(shp_v.head())
