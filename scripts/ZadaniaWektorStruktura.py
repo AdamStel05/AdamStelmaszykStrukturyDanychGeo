@@ -100,9 +100,14 @@ print(gdf2.geom_type)
 
 # Zadanie a
 
-powierzchnie = area(zones, EPSG:2180)
+powierzchnie = area(zones, "EPSG:2180")
 
 # Zadanie b
 
 bounding_box(cities)
 obwod = circumference(bounding_box)
+
+# Zadanie c
+
+rivers["CountLines"] = count(rivers["LineString"])
+geometry["CountPoints"] = count(geometry["Points"])
