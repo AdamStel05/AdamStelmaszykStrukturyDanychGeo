@@ -35,13 +35,21 @@ S = LineString([
     (31, 10)
 ])
 T = LineString([
-    (17, 10),
-    (17, 20),
-    (23, 18),
-    (23, 12),
-    (17, 10)
+    (38, 20),
+    (44, 20),
+    (41, 20),
+    (41, 10)
 ])
-multiline = MultiLineString([A1, D, A2, S, T])
+E = LineString([
+    (51, 20),
+    (45, 20),
+    (45, 15),
+    (51, 15),
+    (45, 15),
+    (45, 10),
+    (51, 10)
+])
+multiline = MultiLineString([A1, D, A2, S, T, E])
 gdfA1 = gpd.GeoDataFrame(
     {
         "name": ["Multilinia"]
@@ -51,3 +59,7 @@ gdfA1 = gpd.GeoDataFrame(
 )
 gdfA1.plot()
 plt.show()
+gdfA1.to_file("dane/adaste.gpkg")
+
+# Zadanie b
+
