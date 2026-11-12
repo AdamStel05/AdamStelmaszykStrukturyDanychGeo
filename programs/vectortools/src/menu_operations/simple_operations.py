@@ -27,21 +27,37 @@ def simple_operations():
         "centroid"
     ).pack()
 
-    tk.Label(window, text="Limit:").pack()
-    tk.Entry(window, textvariable=threshold).pack()
+    limit_frame = tk.Frame(window)
+    limit_label = tk.Label(limit_frame, text="Limit (odległość bufora):")
+    limit_label.pack()
+    limit_entry = tk.Entry(limit_frame, textvariable=threshold)
+    limit_entry.pack()
+
+    def update_limit_visibility(*args):
+        op = operation.get()
+        if op in ("buffer", "simplify"):
+            if op == "buffer":
+                limit_label.config(text="Limit (odległość bufora):")
+            else:
+                limit_label.config(text="Limit (tolerancja upraszczania):")
+            limit_frame.pack(pady=10, before=execute_btn)
+        else:
+            limit_frame.pack_forget()
+            threshold.set("")
 
     def execute():
-        value = float(threshold.get())
 
         result = layer.copy()
         
         if operation.get() == "buffer":
+            value = float(threshold.get())
             result["geometry"] = layer.geometry.buffer(value)
 
         elif operation.get() == "convex hull":
             result["geometry"] = layer.geometry.convex_hull
 
         elif operation.get() == "simplify":
+            value = float(threshold.get())
             result["geometry"] = layer.geometry.simplify(value)
 
         elif operation.get() == "centroid":
@@ -56,8 +72,12 @@ def simple_operations():
             result.to_file(path)
             window.destroy()
 
-    tk.Button(
+    execute_btn = tk.Button(
         window,
         text="Wykonaj",
         command=execute
-    ).pack()
+    )
+    execute_btn.pack()
+
+    operation.trace_add("write", update_limit_visibility)
+    update_limit_visibility()

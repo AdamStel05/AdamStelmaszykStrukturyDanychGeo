@@ -7,6 +7,7 @@ from src.data_service import set_layer
 def load_data_and_remember_outcome():
     layer = load_data()
     set_layer(layer)
+    return True
     
 
 def load_data():

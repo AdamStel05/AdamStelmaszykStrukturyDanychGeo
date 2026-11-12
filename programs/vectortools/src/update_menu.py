@@ -5,7 +5,7 @@ def update_menu(canvas):
 
     if get_layer() is not None:
         canvas.create_text(
-            200,
+            150,
             300,
             text="Plik załadowano poprawnie",
             fill="green",
