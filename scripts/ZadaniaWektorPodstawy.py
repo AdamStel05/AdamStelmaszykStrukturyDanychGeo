@@ -19,7 +19,9 @@ print(liczba_obiektow)
 
 # Zadanie b
 demografia = gpd.read_file(path_to_files+"lsp1.geojson")
-demografia["procenty"] = pd.to_numeric(demografia["ludność_w_wieku_65_lat_i_więcej"], errors="coerce")
+demografia["ludnosc65"] = demografia["ludność_w_wieku_65_lat_i_więcej"].astype(str)
+demografia["ludnosc65"] = demografia["ludnosc65"].str.replace(',', '.').str.replace('%', '').str.strip()
+demografia["procenty"] = pd.to_numeric(demografia["ludnosc65"], errors="coerce")
 kraje_ponad_18 = demografia[demografia["procenty"] > 18]
 fig, ax = plt.subplots(1, 1, figsize=(15, 10))
 kraje_ponad_18.plot(ax=ax, color='red', edgecolor='black')
@@ -27,3 +29,5 @@ plt.show()
 
 # Zadanie c
 wulkany = gpd.read_file(path_to_files+"wulkany/lw1/lw1.shp")
+wulkanyUSA = wulkany[wulkany["kraj"] == "Stany Zjednoczone"]
+print(wulkanyUSA["typ"].value_counts(normalize=True) * 100)
